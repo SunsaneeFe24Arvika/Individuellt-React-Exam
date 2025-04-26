@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Sansita-One';
+  src: url('./assets/SansitaOne.woff2') format('woff2'),
+}
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap');
+
+:root {
+  --Primary-Font: "Sansita-One";
+  --Secondary-Font: "Fira-Sans", sans-serif;
+  --Bar-Code: "Libre-Barcode-128", system-ui;
+  --Pink: #F56B9A;
+  --Background-color: #231F42;
+  --Blue: #37AEAB;
+  --White: #ffffff;
+  --Linear-color: linear-gradient(to top, #F56B9A, #231F42) ;
+
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: var(--Primary-Font);
+  color: var(--Pink);
+}
+h3 {
+  font-family: var(--Secondary-Font);
+}
+.start-page {
+  background-color: var(--Background-color);
+}
