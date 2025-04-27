@@ -1,8 +1,12 @@
-import React from 'react'
-
+import './eventslistpage.css';
+import SearchForm from '../../components/Search/Search';
 function EventsListPage() {
   return (
-    <h1>EventsListPage</h1>
+    <section className="eventslist-page">
+      <h1>Events</h1>
+      <SearchForm />
+    </section>
+    
   );
 }
 
