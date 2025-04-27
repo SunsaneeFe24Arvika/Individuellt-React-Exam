@@ -33,3 +33,10 @@ h3 {
 .start-page {
   background-color: var(--Background-color);
 }
+.eventslist-page {
+  background-color: var(--Background-color);
+}
+.search__form {
+  background-color: var(--White);
+  opacity: 10%;
+}

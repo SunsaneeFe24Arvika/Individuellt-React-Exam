@@ -9,9 +9,10 @@ function App() {
       element: <StartPage />,
     },
     {
-      path: '/Events',
+      path: '/events',
       element: <EventsListPage />,
     },
+    
     
   ]);
 
