@@ -1,5 +1,6 @@
-import { useFetch } from "../../data/useFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { Link } from 'react-router-dom';
+import './eventslist.css';
 
 function EventList() {
    const url = "https://santosnr6.github.io/Data/events.json";
@@ -15,19 +16,28 @@ function EventList() {
        
      return (
         <section className="events__list">
-            <ul className="evens-info__list">
-           {events.map((event) => (
-               <li className="events-item">
-                <Link>
-                <h3 className="event__date">{event.when.date}</h3>
+            <Link to="" className="events__link">
+            <ul className="events-info__list">
+           {events.map((event) => (                
+               <li className="events-item" key={event.id}>                
+                <h3 className="event__date">
+                    {new Date(event.when.date).toLocaleDateString("en-GB",
+                        {
+                            day: "2-digit",
+                            month: "short" // Resultat April = APR
+                        }
+                    ).toUpperCase()}</h3>
+                <aside className="events-info__box">
                 <h2 className="event__artist">{event.name}</h2>
                 <p className="event place">{event.where}</p>
-                <p className="event__start">{event.when.from} - {event.when.to}</p>   
-                </Link>
-                <p className="event__price">{event.price} SEK</p>
+                <p className="event__start">{event.when.from} - {event.when.to}</p> 
+                </aside>          
+                
+                <p className="event__price">{event.price} sek</p>
                </li>
            ))}
             </ul>
+            </Link>
         </section>       
      );
     }
@@ -35,11 +45,3 @@ function EventList() {
 export default EventList;
 
 
-{/* <aside className="events__date">
-            <article className="events__info">
-                <h2 className="events__artist"></h2>
-                <p className="events__place"></p>
-                <p className="events__time"></p>
-            </article>
-            <p className="events__price"></p>
-        </aside> */}
