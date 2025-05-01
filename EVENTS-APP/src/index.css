@@ -13,7 +13,7 @@
   --Background-color: #231F42;
   --Blue: #37AEAB;
   --White: #ffffff;
-  --Linear-color: linear-gradient(to top, #F56B9A, #231F42) ;
+  --Linear-color: linear-gradient(to top, #F56B9A, #231F42);
 
 }
 
@@ -23,20 +23,29 @@
   padding: 0;
 }
 
-h1 {
+.page__title {
   font-family: var(--Primary-Font);
   color: var(--Pink);
+  font-size: 2rem;
+  font-weight: 400;
+  padding-bottom: 2rem;
 }
 h3 {
   font-family: var(--Secondary-Font);
+  text-decoration: none;
 }
 .start-page {
   background-color: var(--Background-color);
 }
 .eventslist-page {
   background-color: var(--Background-color);
+  padding-top: 2rem;
 }
 .search__form {
   background-color: var(--White);
   opacity: 10%;
+}
+/* === EventsListPage === */
+.event__date {
+  color: var(--White);
 }
