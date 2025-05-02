@@ -10,11 +10,11 @@
     
 }
 .logo {
-    width: 350px;
-    height: 350px;
+    width: 250px;
+    height: 250px;
 }
 .start-page__title {
-    font-size: 3rem;
+    font-size: 36px;
 }
 .start-page__desc {
     color: var(--White);

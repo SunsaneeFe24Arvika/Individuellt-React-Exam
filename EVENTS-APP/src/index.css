@@ -6,8 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap');
 
 :root {
-  --Primary-Font: "Sansita-One";
-  --Secondary-Font: "Fira-Sans", sans-serif;
+  --Sansita-One: "Sansita-One";
+  --FiraSans-Font: "Fira Sans", sans-serif;
   --Bar-Code: "Libre-Barcode-128", system-ui;
   --Pink: #F56B9A;
   --Background-color: #231F42;
@@ -24,20 +24,36 @@
 }
 
 .page__title {
-  font-family: var(--Primary-Font);
+  font-family: var(--Sansita-One);
   color: var(--Pink);
   font-size: 2rem;
   font-weight: 400;
   padding-bottom: 2rem;
 }
-h3 {
-  font-family: var(--Secondary-Font);
+.page__title-big {
+  font-size: 35px;
+}
+.start-page__title {
+  color: var(--Pink);
+  font-family: var(--Sansita-One);
+}
+.start-page__desc {
+  font-family: var(--FiraSans-Font);
   text-decoration: none;
 }
 .start-page {
   background-color: var(--Background-color);
 }
-.eventslist-page {
+.logo {
+  width: 182px;
+  height: 178px;
+}
+.eventslist-page, .event-info-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
   background-color: var(--Background-color);
   padding-top: 2rem;
 }

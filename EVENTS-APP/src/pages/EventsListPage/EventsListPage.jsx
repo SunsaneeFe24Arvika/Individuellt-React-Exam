@@ -1,4 +1,4 @@
-import './eventslistpage.css';
+
 import SearchForm from '../../components/Search/Search';
 import EventList from '../../components/EventsList/EventList';
 
@@ -10,7 +10,6 @@ function EventsListPage() {
       <h1 className="page__title">Events</h1>
       <SearchForm />
       <EventList />
-
             
     </section>
     
