@@ -8,7 +8,6 @@ function StartPage() {
   return (
 
     <section className="start-page">
-    <h1 className="page__title">Start Page</h1>
     <Logo />
     <Header />
     </section>

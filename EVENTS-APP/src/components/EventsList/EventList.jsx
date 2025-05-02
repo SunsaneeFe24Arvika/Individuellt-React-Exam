@@ -16,10 +16,11 @@ function EventList() {
        
      return (
         <section className="events__list">
-            <Link to="" className="events__link">
+            
             <ul className="events-info__list">
-           {events.map((event) => (                
-               <li className="events-item" key={event.id}>                
+                {events.map((event) => (                
+               <li className="events-item" key={event.id}>
+                <Link to={`/info/${event.id}`} className="events__link">               
                 <h3 className="event__date">
                     {new Date(event.when.date).toLocaleDateString("en-GB",
                         {
@@ -31,13 +32,14 @@ function EventList() {
                 <h2 className="event__artist">{event.name}</h2>
                 <p className="event place">{event.where}</p>
                 <p className="event__start">{event.when.from} - {event.when.to}</p> 
-                </aside>          
+                </aside>   
                 
                 <p className="event__price">{event.price} sek</p>
+                </Link>
                </li>
            ))}
             </ul>
-            </Link>
+            
         </section>       
      );
     }
