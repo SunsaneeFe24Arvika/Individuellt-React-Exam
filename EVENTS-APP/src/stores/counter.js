@@ -1,6 +1,8 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-const useTicketStore = create((set) => ({
+const useTicketStore = create(persist(
+    (set) => ({
     ticket : 0,
     price : 0,
     totalPrice : 0,
@@ -21,9 +23,14 @@ const useTicketStore = create((set) => ({
         set((state) => ({
             ticket : state.ticket > 0 ? state.ticket - 1 : 0,
             totalPrice : state.ticket > 0 ? (state.ticket -1) * state.price : 0,
-         }));
-       
+         }));       
     },
-}));
+}),
+{
+    name: "ticket-store",
+    partialize: (state) => ({ ticket: state.ticket, price: state.price, totalPrice: state.totalPrice}),
+}
+)
+);
 
 export default useTicketStore;

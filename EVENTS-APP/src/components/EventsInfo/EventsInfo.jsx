@@ -1,15 +1,13 @@
 import { useFetch } from "../../hooks/useFetch";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "../Buttons/Button";
-//import Buttons from "../Buttons/Buttons";
-import { Link } from 'react-router-dom';
 import useTicketStore from "../../stores/counter";
 import { useEffect } from "react";
 
 
 function EventsInfo() {
   const { id } = useParams();
-  console.log("ID from URL:", id); 
+  console.log("ID from URL:", id);
 
   const navigate = useNavigate();
   const url = "https://santosnr6.github.io/Data/events.json";
@@ -29,13 +27,11 @@ function EventsInfo() {
   if (isError) return <p className="error msg">Ett fel inträffade!</p>
 
   const event = data?.events?.find((event) => event.id.toString() === id);
-  console.log("Found event:", event);
-  
+  console.log("Found event:", event);  
   if (!event) return <p>Event hittades inte!</p>
 
-  const handleBackToHome = () => {
-    navigate("/cart");
-  }; 
+  const handleToOrder = () =>
+    navigate('/oderPage')
   
   
 
@@ -47,27 +43,26 @@ function EventsInfo() {
         <span className="event__start">{event.when.from} - {event.when.to}</span>
         <p className="event__place">@ {event.where}</p>
         <h3 className="event__total-price">{totalPrice} sek</h3>
-        <Button 
+        <Button
+        className="decrement-btn" 
         text="-"
         onClick={decrement}
         />
         <p className="amount-ticket">{ticket}</p>
-        <Button 
+        <Button
+        className="increment-btn"
         text="+"
         onClick={increment}
-        />
+        />            
         
-        
-
-        
-      </article>
-
-      <Link>
-      <Button       
+                
+      </article> 
+      <Button 
+        className="add-cart"
         text="Lägg i varukorgen"
-        onClick={handleBackToHome}
+        onClick={handleToOrder}
       />
-      </Link>    
+
       
     </section>
 
@@ -77,3 +72,10 @@ function EventsInfo() {
 
 export default EventsInfo;
 
+// {!isInCart(event) && (
+//   <Button 
+//   className="event-add__button"
+//   text="Lägg i varukorgen"
+//   onClick={() => addToCart(event)}
+//   />
+// )}
