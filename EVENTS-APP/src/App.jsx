@@ -3,21 +3,20 @@ import StartPage from './pages/StartPage/StartPage';
 import EventsListPage from "./pages/EventsListPage/EventsListPage";
 import EventInfoPage from "./pages/EventInfoPage/EventInfoPage";
 
+
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <StartPage />,
+  const router = createBrowserRouter([   
+    { path: "/", 
+      element: <StartPage /> 
     },
     {
-      path: '/events',
+      path: "/events",
       element: <EventsListPage />,
     },
     {
-      path: 'info/:id',
+      path: "/info/:id",
       element: <EventInfoPage />,
     },
-    
     
   ]);
 
@@ -29,3 +28,4 @@ function App() {
 }
 
 export default App;
+
