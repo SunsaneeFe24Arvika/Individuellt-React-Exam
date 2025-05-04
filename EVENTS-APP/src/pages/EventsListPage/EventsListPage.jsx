@@ -1,6 +1,7 @@
 
 import SearchForm from '../../components/Search/Search';
 import EventList from '../../components/EventsList/EventList';
+import Footer from '../../components/Footer/Footer';
 
 
 function EventsListPage() {
@@ -10,6 +11,8 @@ function EventsListPage() {
       <h1 className="page__title">Events</h1>
       <SearchForm />
       <EventList />
+
+      <Footer />
             
     </section>
     

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import StartPage from './pages/StartPage/StartPage';
 import EventsListPage from "./pages/EventsListPage/EventsListPage";
 import EventInfoPage from "./pages/EventInfoPage/EventInfoPage";
+import OrderPage from "./pages/OrderPage/OrderPage";
 
 
 function App() {
@@ -17,13 +18,22 @@ function App() {
       path: "/info/:id",
       element: <EventInfoPage />,
     },
+    {
+      path: "/order",
+      element: <OrderPage />,
+    },
     
   ]);
 
   return (
-    <div className="app">
+    
+      <div className="app">
       <RouterProvider router={router} />
+      
     </div>
+    
+
+   
   );
 }
 
