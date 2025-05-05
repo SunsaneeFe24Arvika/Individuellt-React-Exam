@@ -21,6 +21,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  line-height: 1.5rem;
 }
 
 .page__title {
@@ -56,6 +57,7 @@
   height: 100vh;
   background-color: var(--Background-color);
   padding-top: 2rem;
+  color: antiquewhite;
 }
 .search__form {
   background-color: var(--White);
@@ -65,3 +67,5 @@
 .event__date {
   color: var(--White);
 }
+
+/* === Event-info-Page === */

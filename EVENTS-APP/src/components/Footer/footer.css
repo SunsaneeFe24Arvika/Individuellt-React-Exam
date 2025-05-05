@@ -1,0 +1,18 @@
+.footer__list {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    
+}
+.footer__item {
+    display: flex;
+    list-style-type: none;
+}
+.footer__link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}

@@ -5,13 +5,27 @@ import { FaList } from "react-icons/fa";
 import { BsTicketPerforatedFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import FooterItem from "./FooterItem";
+import useTicketStore from "../../stores/counter";
+import './footer.css';
 
 function Footer() {
+    const resetTotalPrice = useTicketStore(state => state.resetTotalPrice);
     const navigate = useNavigate();
+
+    const handleBackClick = () => {
+      resetTotalPrice();
+
+      if (window.history.length > 2) {
+        navigate(-1);
+      }else {
+        navigate("/");
+      }
+    };
+
     const footerItem = [
         {
             name: "Back",
-            action: () => navigate(-1),
+            action: handleBackClick,
             icon: <VscChevronLeft />,
         },
         {
@@ -27,13 +41,15 @@ function Footer() {
     ];
 
   return (
-    <nav className="nav">
-    <ul className="nav__list">
+  
+  <nav className="footer">
+     <ul className="footer__list">
       {footerItem.map((item, index) => {
-        return <FooterItem key={index} navItem={item} />;
+        return <FooterItem key={index} footerItem={item} />;
       })}
     </ul>
   </nav>
+  
     );
 }
     
