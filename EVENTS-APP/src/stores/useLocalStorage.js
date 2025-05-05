@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
+
 export const useLocalStorage = () => {
+    
     const [eventList, setEventList] = useState(() => {
         try {
             const stored = localStorage.getItem("eventList");
@@ -14,25 +16,32 @@ export const useLocalStorage = () => {
     useEffect(() => {
         localStorage.setItem("eventList", JSON.stringify(eventList));
     }, [eventList]);
-
+    
     const addToCart = (event) => {
-        setEventList((prev) => {
-            const existing = prev.find((b) => b.id === event.id);
-            if (existing) {
-                return prev.map((b) => 
-                b.id === event.id ? {...b, quantity: b.quantity + 1} : b);
-            }            
-            return [...prev, {...event, quantity: 1}];
-        });            
+       const existing = prev.find((b) => b.id === event.id);
+       if (existing) {
+        return prev.map((b) => b.id === event.id
+        ? {...b, quantity: b.quantity + quantity}
+        : b 
+    );
+       }
+            return [...prev, {...event, quantity}];
     };
-
-    const removeFromCart = (id) => {
-        setEventList((prev) => {
-            const updatedList = prev.filter((b) => b.id !== id)
-            console.log("Events som blev bortagen: ", id);
-            return updatedList;
+    
+    const removeFromCart = (id, quantity = 1) => {
+        setEventList((prev) =>  {
+            const existing = prev.find((b) => b.id === id);
+            if (existing && existing.quantity > quantity) {
+                return prev.map((b) => b.id === id
+                ? {...b, quantity: b.quantity - quantity}
+                : b);
+            }
+            return prev.filter((b) => b.id !== id);
         });
+                
     };
 
-    return { eventList, addToCart, removeFromCart};
+    return { eventList, addToCart, removeFromCart };
 };
+
+

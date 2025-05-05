@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
 
-function FooterItem({navItem}) {
+
+function FooterItem({footerItem}) {
   return (
     <li  
-      className="nav__item"
+      className="footer__item"
     >
-      <Link to={navItem.direction} className="nav__link">
-        {navItem.icon}
-        {navItem.name}
-      </Link>
+      <button onClick={footerItem.action} className="footer__link">
+        {footerItem.icon}
+        {footerItem.name}
+      </button>
     </li>
   )
 }
