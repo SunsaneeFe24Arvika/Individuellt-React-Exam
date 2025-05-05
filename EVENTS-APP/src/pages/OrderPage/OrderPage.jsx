@@ -1,4 +1,4 @@
-import React from 'react'
+
 import CartList from '../../components/CartList/CartList'
 import Footer from '../../components/Footer/Footer';
 

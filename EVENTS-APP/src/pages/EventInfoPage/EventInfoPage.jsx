@@ -15,7 +15,7 @@ function EventInfoPage() {
       <EventsInfo />
     </section>
     
-         <Footer />
+      <Footer />
     </>
     
   );

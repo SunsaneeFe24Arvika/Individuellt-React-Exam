@@ -6,8 +6,12 @@ function FooterItem({footerItem}) {
       className="footer__item"
     >
       <button onClick={footerItem.action} className="footer__link">
+        <i className="icon">
         {footerItem.icon}
         {footerItem.name}
+        </i>
+
+        
       </button>
     </li>
   )

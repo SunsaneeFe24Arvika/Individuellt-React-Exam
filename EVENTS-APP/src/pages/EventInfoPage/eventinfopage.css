@@ -21,11 +21,22 @@
     font-weight: 400;
     font-style: italic;
 }
-.event-info__table {
-    display: grid;
-    width: 230px;
-    height: 130px;
-    padding: 3rem;
+.event-info__ticket {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    border: solid 2px palevioletred;
+    
+}
+.event-info__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+    
 }
 .add-cart{
     padding: 10px;
