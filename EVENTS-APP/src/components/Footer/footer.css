@@ -16,3 +16,10 @@
     gap: 5px;
     align-items: center;
 }
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+}

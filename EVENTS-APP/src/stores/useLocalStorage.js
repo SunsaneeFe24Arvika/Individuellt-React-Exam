@@ -1,47 +1,70 @@
-import { useState, useEffect } from "react";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 
-export const useLocalStorage = () => {
-    
-    const [eventList, setEventList] = useState(() => {
-        try {
-            const stored = localStorage.getItem("eventList");
-            return JSON.parse(stored) || [];
-        } catch (error) {
-            console.log("Något gick fel!");
-            return [];            
-        }        
-    });
+// //=== Kod för att skappa localStorage med persist zustand
+const useLocalStorage = create(persist(
+    (set) => ({
+    order : [],
+    orderHistory : [],
+    selectedEvent : null,
 
-    useEffect(() => {
-        localStorage.setItem("eventList", JSON.stringify(eventList));
-    }, [eventList]);
+    setEventDetails: (event) => {
+        set({ selectedEvent: event })},
     
-    const addToCart = (event) => {
-       const existing = prev.find((b) => b.id === event.id);
-       if (existing) {
-        return prev.map((b) => b.id === event.id
-        ? {...b, quantity: b.quantity + quantity}
-        : b 
-    );
-       }
-            return [...prev, {...event, quantity}];
-    };
-    
-    const removeFromCart = (id, quantity = 1) => {
-        setEventList((prev) =>  {
-            const existing = prev.find((b) => b.id === id);
-            if (existing && existing.quantity > quantity) {
-                return prev.map((b) => b.id === id
-                ? {...b, quantity: b.quantity - quantity}
-                : b);
+    // Order hanteringar:
+    // Lägga till event i varukogren
+    addToCart: (event) => {
+        set((state) => {
+            const existingItem = state.order.find((orderItem) => orderItem.id === event.id);
+            if (existingItem) {
+                return {
+                    order: state.order.map((orderItem) => orderItem.id === event.id
+                    ? {...orderItem, ticket: orderItem.ticket + event.ticket}
+                    : orderItem),
+                };
             }
-            return prev.filter((b) => b.id !== id);
+            return {
+                order: [ ...state.order, { ...event, ticket: state.ticket }],
+            };
         });
-                
-    };
+    },
 
-    return { eventList, addToCart, removeFromCart };
-};
+    // Ta bort event från varukogren
+    RemoveFromCart: (id) => {
+        set((state) => ({
+            order: state.order.filter((orderItem) => orderItem.id !== id),
+        }));
+    },
+
+    //Töm order och flytta den till historik, skicka order
+    completeOrder: () => {
+        set((state) => ({
+            orderHistory: [...state.orderHistory, ...state.order],
+            order: [],
+        }));
+    },
+    resetTotalPrice: () => set({ totalPrice: 0, ticket: 0}),
+    
+}),
+{
+    name: "ticket-store",
+    partialize: (state) => ({ ticket: state.ticket, 
+                            price: state.price, 
+                            totalPrice: state.totalPrice,
+                            }),
+},
+{
+    name: "order-storage",
+    partialize: (state) => ({orderHistory: state.orderHistory,
+                            order: state.order,
+                            selectedEvent: state.selectedEvent,
+                            orderHistory: state.orderHistory
+    })
+}
+    
 
 
+));
+
+export default useLocalStorage;
