@@ -3,6 +3,7 @@ import StartPage from './pages/StartPage/StartPage';
 import EventsListPage from "./pages/EventsListPage/EventsListPage";
 import EventInfoPage from "./pages/EventInfoPage/EventInfoPage";
 import OrderPage from "./pages/OrderPage/OrderPage";
+import Tickets from "./pages/Tickets/Tickets";
 
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
       path: "/order",
       element: <OrderPage />,
     },
+    {
+      path: "/tickets",
+      element:<Tickets />,
+    }
     
   ]);
 

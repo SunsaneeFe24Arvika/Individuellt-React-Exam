@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 function EventsInfo() {
   const { id } = useParams();
-  console.log("ID from URL:", id);
+  //console.log("ID from URL:", id);
 
   
   const url = "https://santosnr6.github.io/Data/events.json";
