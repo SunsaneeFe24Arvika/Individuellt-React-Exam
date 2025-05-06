@@ -5,12 +5,13 @@ import { FaList } from "react-icons/fa";
 import { BsTicketPerforatedFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import FooterItem from "./FooterItem";
-import useLocalStorage from "../../stores/useLocalStorage";
-import { FaRegCreditCard } from "react-icons/fa6";
+import useTicketStore from "../../stores/counter";
+import { FaCartShopping } from "react-icons/fa6";
+
 import './footer.css';
 
 function Footer() {
-    const resetTotalPrice = useLocalStorage(state => state.resetTotalPrice);
+    const resetTotalPrice = useTicketStore(state => state.resetTotalPrice);
     const navigate = useNavigate();
 
     const handleBackClick = () => {
@@ -37,7 +38,7 @@ function Footer() {
         {
             name: "Order",
             action: () => navigate("/order"),
-            icon: <FaRegCreditCard />,
+            icon: <FaCartShopping />,
         },
         {
             name: "Tickets",
