@@ -54,10 +54,6 @@ import { persist } from "zustand/middleware";
 
 
 
-
-
-
-
 // // //=== Kod för att skappa localStorage med persist zustand
 const useTicketStore = create(persist(
     (set) => ({
@@ -65,6 +61,7 @@ const useTicketStore = create(persist(
         ticket : 0,
         price : 0,
         totalPrice : 0,
+        setOrder: (newOrder) => set({ order: newOrder }),
         setPrice : (newPrice) => {
             set((state) => ({
                 price : newPrice,
@@ -79,47 +76,45 @@ const useTicketStore = create(persist(
             
         },
         decrement : () => {
-            set((state) => ({
-                ticket : state.ticket > 0 ? state.ticket - 1 : 0,
-                totalPrice : state.ticket > 0 ? (state.ticket -1) * state.price : 0,
-             }));       
+                    set((state) => ({
+                        ticket : state.ticket > 0 ? state.ticket - 1 : 0,
+                        totalPrice : state.ticket > 0 ? (state.ticket -1) * state.price : 0,
+                     }));       
         },
         addToCart: (event) => {
             set((state) => {
-                // ตรวจสอบว่า ticket มีค่ามากกว่า 0
+                
                 if (state.ticket === 0) {
                     console.error("Antal biljetter är 0. Lägg till minst en biljett.");
-                    return state; // ไม่ทำอะไรถ้าจำนวนบัตรเป็น 0
-                }
-        
-                // ตรวจสอบว่ามี event นี้ใน order อยู่แล้วหรือไม่
+                    return state; 
+                }        
+                
                 const existingItem = state.order.find((orderItem) => orderItem.id === event.id);
                 if (existingItem) {
-                    // ถ้ามี event อยู่แล้ว ให้เพิ่มจำนวนบัตร (ticket) เข้าไป
+                    
                     const updatedOrder = state.order.map((orderItem) =>
                         orderItem.id === event.id
-                            ? { ...orderItem, ticket: orderItem.ticket + state.ticket } // ใช้ state.ticket
+                            ? { ...orderItem, ticket: orderItem.ticket + state.ticket } 
                             : orderItem
                     );
                     console.log("Uppdaterad order: ", updatedOrder);
                     return { order: updatedOrder };
-                }
-        
-                // ถ้าไม่มี event นี้ใน order ให้เพิ่มใหม่
-                const newOrder = [...state.order, { ...event, ticket: state.ticket }]; // ใช้ state.ticket
+                }        
+                
+                const newOrder = [...state.order, { ...event, ticket: state.ticket }]; 
                 console.log("Ny order:", newOrder);
         
-                // รีเซ็ตจำนวนบัตรหลังจากเพิ่มใน order
+                
                 return { order: newOrder, ticket: 0, totalPrice: 0 };
             });
         },
-        // Ta bort event från varukogren
-    removeFromCart: (id) => {
-        set((state) => ({
-            order: state.order.filter((orderItem) => orderItem.id !== id),
-        }));
-    },
-
+        removeFromCart: (id) => {
+            set((state) => ({
+                cart: state.cart.filter((item) => item.id !== id),
+            }));
+        },
+    
+        
     //Töm order och flytta den till historik, skicka order
     completeOrder: () => {
         set((state) => ({
@@ -127,9 +122,10 @@ const useTicketStore = create(persist(
             order: [],
         }));
     },
-    resetTotalPrice: () => set({ totalPrice: 0, ticket: 0}),
-    
+
+    resetTotalPrice: () => set({ totalPrice: 0, ticket: 0 }),
 }),
+
 {
     name: "ticket-store",
     partialize: (state) => ({ ticket: state.ticket, 
