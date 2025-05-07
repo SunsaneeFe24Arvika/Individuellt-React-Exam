@@ -1,13 +1,13 @@
-
-import CartList from '../../components/CartList/CartList'
+import './orderpage.css';
 import Footer from '../../components/Footer/Footer';
+import GetCart from '../../components/GetCart/GetCart';
 
 function OrderPage() {
   return (
     <>
-    <section className="order-Page">
-      <h1 className="page__title">Order</h1>
-      <CartList />
+    <section className="order-page">
+      <h1 className="page__title order-page__title">Order</h1>
+      <GetCart />
     </section>
     
     <Footer />

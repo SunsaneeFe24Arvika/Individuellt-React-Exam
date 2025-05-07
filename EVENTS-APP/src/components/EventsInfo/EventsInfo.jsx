@@ -15,13 +15,16 @@ function EventsInfo() {
   const { data, isLoading, isError } = useFetch(url);
 
   const { setPrice,
+          setEventDetails,
           ticket, 
           price,
           order,
           totalPrice, 
           increment, 
           decrement,
-          addToCart
+          addToCart,
+          selectecEvent
+
           
         } = useTicketStore();
   
@@ -31,7 +34,7 @@ function EventsInfo() {
         useEffect(() => {
             if (event) {
               setPrice(event.price); //Uppdatera priset i store
-              
+                            
             }
         }, [data, id, setPrice]);
 
@@ -74,6 +77,7 @@ function EventsInfo() {
         onClick={() => {
           console.log("Event som skickas till addToCart:", event);
         addToCart(event);
+        selectecEvent();
           
         }}
       />

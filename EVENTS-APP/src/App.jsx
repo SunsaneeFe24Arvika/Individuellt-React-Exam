@@ -20,7 +20,7 @@ function App() {
       element: <EventInfoPage />,
     },
     {
-      path: "/order",
+      path: "/order/:id",
       element: <OrderPage />,
     },
     {

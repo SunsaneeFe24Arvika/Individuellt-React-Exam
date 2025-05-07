@@ -65,6 +65,13 @@ const useTicketStore = create(persist(
         ticket : 0,
         price : 0,
         totalPrice : 0,
+        orderHistory : [],
+        selectedEvent : null,
+
+        setEventDetails: (event) => {
+        set({ selectedEvent: event })},
+
+
         setPrice : (newPrice) => {
             set((state) => ({
                 price : newPrice,
@@ -89,13 +96,12 @@ const useTicketStore = create(persist(
                 // ตรวจสอบว่า ticket มีค่ามากกว่า 0
                 if (state.ticket === 0) {
                     console.error("Antal biljetter är 0. Lägg till minst en biljett.");
-                    return state; // ไม่ทำอะไรถ้าจำนวนบัตรเป็น 0
+                    return state; 
                 }
         
-                // ตรวจสอบว่ามี event นี้ใน order อยู่แล้วหรือไม่
                 const existingItem = state.order.find((orderItem) => orderItem.id === event.id);
                 if (existingItem) {
-                    // ถ้ามี event อยู่แล้ว ให้เพิ่มจำนวนบัตร (ticket) เข้าไป
+                    
                     const updatedOrder = state.order.map((orderItem) =>
                         orderItem.id === event.id
                             ? { ...orderItem, ticket: orderItem.ticket + state.ticket } // ใช้ state.ticket
@@ -105,15 +111,15 @@ const useTicketStore = create(persist(
                     return { order: updatedOrder };
                 }
         
-                // ถ้าไม่มี event นี้ใน order ให้เพิ่มใหม่
+                
                 const newOrder = [...state.order, { ...event, ticket: state.ticket }]; // ใช้ state.ticket
                 console.log("Ny order:", newOrder);
         
-                // รีเซ็ตจำนวนบัตรหลังจากเพิ่มใน order
+                
                 return { order: newOrder, ticket: 0, totalPrice: 0 };
             });
         },
-        // Ta bort event från varukogren
+        
     removeFromCart: (id) => {
         set((state) => ({
             order: state.order.filter((orderItem) => orderItem.id !== id),
@@ -127,7 +133,7 @@ const useTicketStore = create(persist(
             order: [],
         }));
     },
-    resetTotalPrice: () => set({ totalPrice: 0, ticket: 0}),
+    resetCart: () => set({ totalPrice: 0, ticket: 0}),
     
 }),
 {
@@ -138,6 +144,13 @@ const useTicketStore = create(persist(
                             order: state.order,
                             }),
 },
+{
+    name: "order-storage",
+    partialize: (state) => ({orderHistory: state.orderHistory,
+                            selectedEvent: state.selectedEvent,
+                           
+    })
+}
 
 ));
 
