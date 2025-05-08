@@ -18,7 +18,6 @@ function EventsInfo() {
           ticket, 
           price,
           order,
-          totalPrice, 
           increment, 
           decrement,
           addToCart
@@ -39,6 +38,8 @@ function EventsInfo() {
   if (isError) return <p className="error msg">Ett fel inträffade!</p>
   if (!event) return <p>Event hittades inte!</p>;
   
+  const totalPrice = ticket * price;
+  
 
   return (
     <section className="event-info">
@@ -54,7 +55,7 @@ function EventsInfo() {
         <Button
         className="decrement-btn" 
         text="-"
-        onClick={decrement} 
+        onClick={() => decrement(event.id)}
         />
         
         <span className="event__quantity">{ticket}</span>
@@ -62,7 +63,8 @@ function EventsInfo() {
         <Button
         className="increment-btn"
         text="+"
-        onClick={increment}
+        onClick={() => increment(event.id)}
+            
         /> 
         </div>           
         </div>
