@@ -1,0 +1,49 @@
+.order-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--Background-color);
+    color: whitesmoke;
+    width: 100%;
+    min-height: 100vh;
+}
+.order-page__title {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+.order-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  height: auto;
+  gap: 2rem;
+}
+.order-item {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px palevioletred;
+}
+.order__article {
+    border-bottom: solid 1px palevioletred;
+}
+.order-qty {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+.event__title {
+    padding: 1rem 1rem 0 1rem;
+}
+.order-text {
+    padding: 2rem;
+}
+.order-price__sum {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 2rem;
+}
+.event-text {
+    padding: 0.5rem 1rem;
+}

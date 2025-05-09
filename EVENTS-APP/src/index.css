@@ -1,0 +1,110 @@
+@font-face {
+  font-family: 'Sansita-One';
+  src: url('./assets/SansitaOne.woff2') format('woff2'),
+}
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap');
+
+:root {
+  --Sansita-One: "Sansita-One";
+  --FiraSans-Font: "Fira Sans", sans-serif;
+  --Bar-Code: "Libre-Barcode-128", system-ui;
+  --Pink: #F56B9A;
+  --Background-color: #231F42;
+  --Blue: #37AEAB;
+  --White: #ffffff;
+  --Linear-color: linear-gradient(to top, #F56B9A, #231F42);
+
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5rem;
+}
+
+.page__title__standard,
+.event__title {
+  color: var(--Pink);
+  font-size: 2rem;
+  font-weight: 900;
+  
+}
+.page__title-big {
+  font-size: 35px;
+  
+}
+.start-page__title, 
+.event__title, 
+.event__total-price,
+.page__title__standard,
+.event__places
+
+{
+  font-family: var(--Sansita-One);
+}
+
+.start-page__desc {
+  font-family: var(--FiraSans-Font);
+  text-decoration: none;
+}
+.start-page {
+  background-color: var(--Background-color);
+}
+.logo {
+  width: 182px;
+  height: 178px;
+}
+.eventslist-page, .event-info-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--Background-color);
+  padding-top: 2rem;
+  color: var(--White);
+}
+.search__form {
+  background-color: var(--White);
+  opacity: 30%;
+  margin: 2rem;
+}
+label {
+  display: flexs;
+  color: var(--Blue);
+  align-items: centers;
+}
+
+/* === EventsListPage === */
+.event__date {
+  color: var(--White);
+}
+
+/* === Event-info-Page === */
+.event__price, 
+.event-info__date,
+.decrement-btn, 
+.increment-btn, 
+.event__quantity,
+.event__artist,
+.add-cart,
+.order-text,
+.order-price__sum,
+.event-text
+{
+  font-family: var(--FiraSans-Font);
+}
+.add-cart,
+.send-order__btn
+{
+  background-color: var(--Blue);
+  color: var(--White);
+}
+.increment-btn,
+.decrement-btn {
+  background-color: var(--Background-color);
+  border: none;
+  
+}
