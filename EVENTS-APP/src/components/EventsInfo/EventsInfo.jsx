@@ -15,7 +15,6 @@ function EventsInfo() {
   const { data, isLoading, isError } = useFetch(url);
 
   const { setPrice,
-          setEventDetails,
           ticket, 
           price,
           order,
@@ -79,8 +78,6 @@ function EventsInfo() {
         onClick={() => {
           console.log("Event som skickas till addToCart:", event);
         addToCart(event);
-        selectecEvent();
-          
         }}
       />
 

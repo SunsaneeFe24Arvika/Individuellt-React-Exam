@@ -8,6 +8,7 @@ import FooterItem from "./FooterItem";
 import useTicketStore from "../../stores/counter";
 import { FaCartShopping } from "react-icons/fa6";
 import { useLocation } from "react-router-dom";
+import GetTicket from "../GetTicket/GetTicket";
 
 import './footer.css';
 
@@ -15,6 +16,8 @@ function Footer() {
     const resetTotalPrice = useTicketStore(state => state.resetTotalPrice);
     const navigate = useNavigate();
     const location = useLocation();
+
+    
 
     const handleBackClick = () => {
       resetTotalPrice();
@@ -44,7 +47,9 @@ function Footer() {
         },
         {
             name: "Tickets",
-            action: () => navigate("/tickets"),
+            action: () => {
+              GetTicket();
+              navigate("/tickets")},
             icon: <BsTicketPerforatedFill />,
         },
     ];
@@ -66,36 +71,3 @@ function Footer() {
 export default Footer;
 
 
-//==== Kod med Chakra UI ===
-// function NavBar() {
-//     const navigate = useNavigate();
-//     const navItem = [
-//         {
-//             name: "Back",
-//             action: () => navigate(-1),
-//             icon: <VscChevronLeft />,
-//         },
-//         {
-//             name: "Events",
-//             action: () => navigate("/events"),
-//             icon:<FaList />,
-//         },
-//         {
-//             name: "Tickets",
-//             action: () => navigate("/tickets"),
-//             icon: <BsTicketPerforatedFill />,
-//         },
-//     ];
-
-//   return (
-//     <Flex gap="4">
-//         {navItem.map((item, index) => (
-//             <Flex key={index} direction="row" align="center" onClick={item.action}>
-//                 <DecorativeBox heighet="10" />
-//                 {item.icon}
-
-//             </Flex>
-//         ))}
-//     </Flex>
-//     );
-// }

@@ -24,7 +24,7 @@
     
 }
 .event__place {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     font-style: italic;
     opacity: 60%;
@@ -58,14 +58,21 @@
 }
 .decrement-btn, 
 .increment-btn, 
-.event__quantity {
-    font-size: 1.5rem;
+.order-qty {
+    font-size: 2rem;
     color: white;
     opacity: 80%;
 }
-.add-cart{
-    padding: 10px;
+.add-cart,
+.send-order__btn
+{
+    padding: 1.2rem;
     margin-top: 10rem;
     width: 310px;
     height: 60px;
+    font-size: 22px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }

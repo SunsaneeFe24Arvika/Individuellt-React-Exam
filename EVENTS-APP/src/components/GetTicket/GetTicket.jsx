@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react';
 import useTicketStore from '../../stores/counter';
-import JsBarcode from 'jsbarcode';
+//import Barcode from '../Barcode/Barcode';
 
 
 function GetTicket() {
@@ -9,32 +9,33 @@ function GetTicket() {
   const [orderHistory, setOrderHistory] = useState([]);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('ticket-store')) || [];
-    setOrderHistory(stored);
-  }, []);
- 
-  
-  const generateRandomBarCode = (length) => {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "";
-    for (let i = 0 ; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters. length);
-        result += characters[randomIndex];
+    const stored = localStorage.getItem('ticket-store');
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) {
+        setOrderHistory(parsed);
+      }else {
+        setOrderHistory([]);
+      }
+    } catch (error) {
+      console.log('Error parsing ticket-store data:', error);
+      setOrderHistory([]);
     }
-    return result;
-  }
-  const showBarCode = generateRandomBarCode(8);
+  }, []);  
 
-  const barCodeGenerator = () => {
-    const [valute, setValue] = useState(generateRandomBarCode(8));
+  // const generateRandomBarcode = (length = 8) => {
+  //     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  //     let result = "";
+  //     for (let i = 0 ; i < length; i++) {
+  //       const randomIndex = Math.floor(Math.random() * characters. length);
+  //         result += characters[randomIndex];
+  //     }
+  //     return result;
+  //   };
 
-    const handleGenerateNewBarcode = () => {
-      const newBarcode = generateRandomBarCode(8);
-      setValue(newBarcode);
-    };
-  }
-
+  //   const barcode = generateRandomBarcode();
    
+
   return (
     <>
     {orderHistory.length === 0 ? (
@@ -55,11 +56,9 @@ function GetTicket() {
             <p>TO</p>
             <h3>{order.when.to}</h3>
             <p>INFO</p>
+
             <p>{order.section}</p> <span>{order.seats}</span>
-            <p>{generateRandomBarCode(8)}</p>
-
-
-
+            {/* <Barcode value={barcode} /> */}
           </li>
           ))          
         ))}        

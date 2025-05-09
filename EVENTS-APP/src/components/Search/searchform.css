@@ -1,24 +1,26 @@
 .search__form {
     border: none;
     display: flex;
+    align-items: center;
     width: 80%;
     padding: 5px;
-    border-radius: 5px;
-    margin-bottom: 2rem;
-
-    .search-icon {   
-        width: 30px;
-        height: 30px;
+    border-radius: 5px;   
+}
+.search-icon {   
+    display: flex;
+    align-items: centers;
+    width: 30px;
+    height: 30px;
         
-    }
-    
 }
 .search__input {
     width: 100%;
     border: none;
     padding: 10px;
     border-radius: 5px;
-    color: antiquewhite;
+    font-size: 1.2rem;
+    color: var(--Blue);
+    
 }
 .search__submit-button {
     border: none;

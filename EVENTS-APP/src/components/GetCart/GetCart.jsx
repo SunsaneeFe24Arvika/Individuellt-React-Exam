@@ -1,5 +1,5 @@
 import useTicketStore from '../../stores/counter';
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from '../Buttons/Button';
 
 
@@ -7,7 +7,7 @@ function GetCart() {
     const order = useTicketStore((state) => state.order) || [];
     const setOrder = useTicketStore((state) => state.setOrder);
     const [totalPrice, setTotalPrice] = useState(0);
-    const { increment, decrement, completeOrder, removeFromCart} = useTicketStore();
+    const { increment, decrement, completeOrder} = useTicketStore();
 
     //Hämta data från localStorage vid sidladdning
     useEffect(() => {
@@ -31,11 +31,20 @@ function GetCart() {
 
     return (
         <>
-           {(order?.length || 0) === 0 && <p>Din korg är tom!</p>}
+           {(order?.length || 0) === 0 && <p className='order-text'>Din korg är tom!</p>}
             <ul className='order-list'>
                 {(order || []).map((item) => (
                     <li className='order-item' key={item.id}>
-                        {item.name} - {item.when.date} - {item.when.from}
+                        <div className='order__article'>
+                        <article className='event-list__info'>
+                            <h3 className="event__title">
+                                {item.name}
+                            </h3>
+                            <p className="event-text">
+                                {item.when.date} - {item.when.from}
+                            </p>
+                        </article>                                                   
+                        </div>
                         <div className='order-qty'>
                         <Button
                         className="decrement-btn" 

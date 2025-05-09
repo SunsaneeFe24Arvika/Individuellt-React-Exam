@@ -28,12 +28,13 @@ function EventList() {
                         }
                     ).toUpperCase()}</h3>
                 <aside className="events-info__box">
-                <h2 className="event__artist">{event.name}</h2>
-                <p className="event place">{event.where}</p>
+                <h2 className="event__artist event__name">{event.name}</h2>
+                <p className="event__place">{event.where}</p>
                 <p className="event__start">{event.when.from} - {event.when.to}</p> 
-                </aside>   
                 
-                <p className="event__price">{event.price} sek</p>
+                </aside>   
+                <span className="event__price">{event.price} sek</span>
+                
                 </Link>
                </li>
            ))}

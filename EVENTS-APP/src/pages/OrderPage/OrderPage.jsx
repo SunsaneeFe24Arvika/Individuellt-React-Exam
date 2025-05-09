@@ -7,10 +7,11 @@ function OrderPage() {
     <>
     <section className="order-page">
       <h1 className="page__title__standard order-page__title">Order</h1>
-      <GetCart />
+     <GetCart />
+     
     </section>
-    
     <Footer />
+    
     </>
     
   );

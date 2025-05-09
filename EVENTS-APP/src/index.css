@@ -38,7 +38,10 @@
 .start-page__title, 
 .event__title, 
 .event__total-price,
-.page__title__standard {
+.page__title__standard,
+.event__places
+
+{
   font-family: var(--Sansita-One);
 }
 
@@ -65,8 +68,15 @@
 }
 .search__form {
   background-color: var(--White);
-  opacity: 10%;
+  opacity: 30%;
+  margin: 2rem;
 }
+label {
+  display: flexs;
+  color: var(--Blue);
+  align-items: centers;
+}
+
 /* === EventsListPage === */
 .event__date {
   color: var(--White);
@@ -77,7 +87,24 @@
 .event-info__date,
 .decrement-btn, 
 .increment-btn, 
-.event__quantity  {
+.event__quantity,
+.event__artist,
+.add-cart,
+.order-text,
+.order-price__sum,
+.event-text
+{
   font-family: var(--FiraSans-Font);
 }
-
+.add-cart,
+.send-order__btn
+{
+  background-color: var(--Blue);
+  color: var(--White);
+}
+.increment-btn,
+.decrement-btn {
+  background-color: var(--Background-color);
+  border: none;
+  
+}

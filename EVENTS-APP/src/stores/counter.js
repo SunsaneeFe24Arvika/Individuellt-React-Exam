@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import GetCart from "../components/GetCart/GetCart";
 
 // // //=== Kod för att skappa localStorage med persist zustand
 const useTicketStore = create(persist(
