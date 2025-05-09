@@ -5,6 +5,12 @@
     padding: 5px;
     border-radius: 5px;
     margin-bottom: 2rem;
+
+    .search-icon {   
+        width: 30px;
+        height: 30px;
+        
+    }
     
 }
 .search__input {
@@ -16,10 +22,5 @@
 }
 .search__submit-button {
     border: none;
-    
-}
-.search-icon {   
-    width: 30px;
-    height: 30px;
     
 }

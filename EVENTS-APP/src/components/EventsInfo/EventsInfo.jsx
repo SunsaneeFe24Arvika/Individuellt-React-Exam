@@ -44,7 +44,7 @@ function EventsInfo() {
   return (
     <section className="event-info">
       <article className="event-info__box">
-        <h1 className="event__title page__title page__title-big">{event.name}</h1>
+        <h1 className="event__title page__title-big">{event.name}</h1>
         <h3 className="event-info__date">{event.when.date} kl {event.when.from} - {event.when.to}</h3>
       
         <p className="event__place">@ {event.where}</p>

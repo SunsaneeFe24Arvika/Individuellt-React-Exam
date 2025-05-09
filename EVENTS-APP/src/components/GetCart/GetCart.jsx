@@ -1,39 +1,4 @@
 import useTicketStore from '../../stores/counter';
-
-
-// function GetCart() {
-//     const order = useTicketStore((state) => state.order);
-//     const completeOrder = useTicketStore((state) => state.completeOrder);
-//     const increment = useTicketStore((state) => state.increment);
-//     const decrement = useTicketStore((state) => state.decrement);
-
-//     const totalPrice = order.reduce((total, item) => {
-//         return total + item.price * item.ticket
-//     }, 0)
-
-//     return (
-//         <div>
-//             <h1>Din varukorg</h1>
-//             {order.lenght=== 0 && <p>Din korg är tom!</p>}
-//             <ul>
-//                 {order.map((item) => (
-//                     <li key={item.id}>
-//                         {item.name} - {item.when.date} - {item.when.from}
-//                         <button onClick={() => decrement(item.id)}>Ta bort</button>
-//                         <p>{totalPrice}</p>
-//                         <button onClick={() => increment(item.id)}>Ta bort</button>
-
-//                     </li>
-//                 ))}
-//             </ul>
-//             <button onClick={() => completeOrder(item.id)}>Skicka order</button>
-//         </div>
-//     );
-// }
-
-// export default GetCart;
-  
-
 import React, { useEffect, useState } from "react";
 import Button from '../Buttons/Button';
 
