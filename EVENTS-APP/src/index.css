@@ -24,20 +24,24 @@
   line-height: 1.5rem;
 }
 
-.page__title {
-  font-family: var(--Sansita-One);
+.page__title__standard,
+.event__title {
   color: var(--Pink);
   font-size: 2rem;
-  font-weight: 400;
-  padding-bottom: 2rem;
+  font-weight: 900;
+  
 }
 .page__title-big {
   font-size: 35px;
+  
 }
-.start-page__title {
-  color: var(--Pink);
+.start-page__title, 
+.event__title, 
+.event__total-price,
+.page__title__standard {
   font-family: var(--Sansita-One);
 }
+
 .start-page__desc {
   font-family: var(--FiraSans-Font);
   text-decoration: none;
@@ -54,10 +58,10 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--Background-color);
   padding-top: 2rem;
-  color: antiquewhite;
+  color: var(--White);
 }
 .search__form {
   background-color: var(--White);
@@ -69,3 +73,11 @@
 }
 
 /* === Event-info-Page === */
+.event__price, 
+.event-info__date,
+.decrement-btn, 
+.increment-btn, 
+.event__quantity  {
+  font-family: var(--FiraSans-Font);
+}
+

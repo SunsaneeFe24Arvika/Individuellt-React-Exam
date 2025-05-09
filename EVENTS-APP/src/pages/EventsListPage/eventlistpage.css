@@ -40,5 +40,8 @@
     place-content: end;
     border-bottom: solid white 1px;
     text-align: right;
-    color: whitesmoke;
+    color: var(--Blue);
+    font-size: 1rem;
+    font-weight: bold;
+    
 }
