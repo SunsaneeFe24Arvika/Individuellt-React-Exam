@@ -1,63 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-
-
-// const useTicketStore = create(
-//     (set) => ({
-//     order : [],
-//     ticket : 0,
-//     price : 0,
-//     totalPrice : 0,
-//     setPrice : (newPrice) => {
-//         set((state) => ({
-//             price : newPrice,
-//             totalPrice : state.ticket * newPrice, //Återställ totalpris när priset uppdateras
-//         }));
-//     },
-//     increment : () => {
-//         set((state) => ({
-//             ticket : state.ticket + 1,
-//             totalPrice : (state.ticket + 1) * state.price,
-//         }));
-        
-//     },
-//     decrement : () => {
-//         set((state) => ({
-//             ticket : state.ticket > 0 ? state.ticket - 1 : 0,
-//             totalPrice : state.ticket > 0 ? (state.ticket -1) * state.price : 0,
-//          }));       
-//     },
-//     addToCart: (event) => {
-//         set((state) => {
-//             const existingItem = state.order.find((orderItem) => orderItem.id === event.id);
-//             if (existingItem) {
-//                 const updatedOrder = state.order.map((orderItem) =>
-//                 orderItem.id === event.id
-//                 ? {...orderItem, ticket: orderItem.ticket + event.ticket}
-//                     : orderItem
-//                 );
-                
-//                 console.log("Uppdterad order: ", updatedOrder);
-//                 return { order: updatedOrder };
-//              }
-//              const newOrder = [...state.order, { ...event, ticket: state.ticket }];
-//              console.log("Ny order:", newOrder);
-             
-//             return { order: newOrder };
-//         });
-//     },
-//     resetTotalPrice: () => set({ totalPrice: 0, ticket: 0}),
-
-// })
-// )
-
-
-
-
-
-
-
 // // //=== Kod för att skappa localStorage med persist zustand
 const useTicketStore = create(persist(
     (set) => ({
@@ -65,67 +8,72 @@ const useTicketStore = create(persist(
         ticket : 0,
         price : 0,
         totalPrice : 0,
-        orderHistory : [],
-        selectedEvent : null,
-
-        setEventDetails: (event) => {
-        set({ selectedEvent: event })},
-
-
+        orderHistory: [],
+        setOrder: (newOrder) => set({ order: newOrder }),
         setPrice : (newPrice) => {
             set((state) => ({
                 price : newPrice,
                 totalPrice : state.ticket * newPrice, //Återställ totalpris när priset uppdateras
             }));
         },
-        increment : () => {
+        increment: (id) =>
             set((state) => ({
-                ticket : state.ticket + 1,
-                totalPrice : (state.ticket + 1) * state.price,
-            }));
+              order: state.order.map((item) =>
+                item.id === id ? { ...item, ticket: (item.ticket || 0) + 1 } : item
+              ),
+              ticket: state.ticket + 1, // Uppdatera ticket
+            })),
+            decrement: (id) =>
+                set((state) => {
+                    const updatedOrder = state.order
+                        .map((item) =>
+                            item.id === id
+                                ? { ...item, ticket: item.ticket - 1 }
+                                : item
+                        )
+                        .filter((item) => item.ticket > 0); // Ta bort event om ticket är 0
             
-        },
-        decrement : () => {
-            set((state) => ({
-                ticket : state.ticket > 0 ? state.ticket - 1 : 0,
-                totalPrice : state.ticket > 0 ? (state.ticket -1) * state.price : 0,
-             }));       
-        },
+                    return {
+                        order: updatedOrder,
+                        ticket: state.ticket > 0 ? state.ticket - 1 : 0, // Uppdatera ticket
+                    };
+                }),  
+                
         addToCart: (event) => {
             set((state) => {
-                // ตรวจสอบว่า ticket มีค่ามากกว่า 0
+                
                 if (state.ticket === 0) {
                     console.error("Antal biljetter är 0. Lägg till minst en biljett.");
                     return state; 
-                }
-        
+                }        
+                
                 const existingItem = state.order.find((orderItem) => orderItem.id === event.id);
                 if (existingItem) {
                     
                     const updatedOrder = state.order.map((orderItem) =>
                         orderItem.id === event.id
-                            ? { ...orderItem, ticket: orderItem.ticket + state.ticket } // ใช้ state.ticket
+                            ? { ...orderItem, ticket: orderItem.ticket + state.ticket } 
                             : orderItem
                     );
                     console.log("Uppdaterad order: ", updatedOrder);
                     return { order: updatedOrder };
-                }
-        
+                }        
                 
-                const newOrder = [...state.order, { ...event, ticket: state.ticket }]; // ใช้ state.ticket
+                const newOrder = [...state.order, { ...event, ticket: state.ticket }]; 
                 console.log("Ny order:", newOrder);
         
                 
                 return { order: newOrder, ticket: 0, totalPrice: 0 };
             });
         },
+            
+        removeFromCart: (id) => {
+            set((state) => ({
+                cart: state.cart.filter((item) => item.id !== id),
+            }));
+        },
+    
         
-    removeFromCart: (id) => {
-        set((state) => ({
-            order: state.order.filter((orderItem) => orderItem.id !== id),
-        }));
-    },
-
     //Töm order och flytta den till historik, skicka order
     completeOrder: () => {
         set((state) => ({
@@ -133,44 +81,19 @@ const useTicketStore = create(persist(
             order: [],
         }));
     },
-    resetCart: () => set({ totalPrice: 0, ticket: 0}),
-    
+
+    resetTotalPrice: () => set({ totalPrice: 0, ticket: 0 }),
 }),
+
 {
     name: "ticket-store",
-    partialize: (state) => ({ ticket: state.ticket, 
-                            price: state.price, 
-                            totalPrice: state.totalPrice,
+    partialize: (state) => ({ 
                             order: state.order,
+                            orderHistory: state.orderHistory
                             }),
 },
-{
-    name: "order-storage",
-    partialize: (state) => ({orderHistory: state.orderHistory,
-                            selectedEvent: state.selectedEvent,
-                           
-    })
-}
 
 ));
 
 export default useTicketStore;
 
-// addToCart: (event) => {
-//     set((state) => {
-//         const existingItem = state.order.find((orderItem) => orderItem.id === event.id);
-//         if (existingItem) {
-//             const updatedOrder = state.order.map((orderItem) =>
-//             orderItem.id === event.id
-//             ? {...orderItem, ticket: orderItem.ticket + event.ticket}
-//                 : orderItem
-//             );
-            
-//             console.log("Uppdterad order: ", updatedOrder);
-//             return { order: updatedOrder };
-//          }
-//          const newOrder = [...state.order, { ...event, ticket: state.ticket }];
-//          console.log("Ny order:", newOrder);
-         
-//         return { order: newOrder };
-//     });

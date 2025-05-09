@@ -1,6 +1,5 @@
 import { useFetch } from "../../hooks/useFetch";
 import { Link } from 'react-router-dom';
-import './eventslist.css';
 
 function EventList() {
    const url = "https://santosnr6.github.io/Data/events.json";

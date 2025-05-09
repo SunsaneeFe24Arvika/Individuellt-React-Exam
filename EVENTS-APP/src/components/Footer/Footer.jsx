@@ -7,19 +7,21 @@ import { useNavigate } from 'react-router-dom';
 import FooterItem from "./FooterItem";
 import useTicketStore from "../../stores/counter";
 import { FaCartShopping } from "react-icons/fa6";
+import { useLocation } from "react-router-dom";
 
 import './footer.css';
 
 function Footer() {
     const resetTotalPrice = useTicketStore(state => state.resetTotalPrice);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleBackClick = () => {
       resetTotalPrice();
 
       if (window.history.length > 2) {
         navigate(-1);
-      }else {
+      }else if (location.pathname === '/events') {
         navigate("/");
       }
     };

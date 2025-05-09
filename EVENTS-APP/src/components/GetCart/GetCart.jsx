@@ -1,3 +1,4 @@
+import useTicketStore from '../../stores/counter';
 import React, { useEffect, useState } from "react";
 import Button from '../Buttons/Button';
 
@@ -6,9 +7,9 @@ function GetCart() {
     const order = useTicketStore((state) => state.order) || [];
     const setOrder = useTicketStore((state) => state.setOrder);
     const [totalPrice, setTotalPrice] = useState(0);
-    const { increment, decrement, ticket, resetCart, completeOrder} = useTicketStore();
+    const { increment, decrement, completeOrder, removeFromCart} = useTicketStore();
 
-    // Hämta data från localStorage vid sidladdning
+    //Hämta data från localStorage vid sidladdning
     useEffect(() => {
         const savedOrder = localStorage.getItem("ticket-store");
         if (savedOrder) {
@@ -18,13 +19,15 @@ function GetCart() {
         }
     }, [setOrder]);
 
+    
     useEffect(() => {
         const calculatedTotalPrice = order.reduce((total, item) => {
             return total + item.price * item.ticket;
         }, 0);
         setTotalPrice(calculatedTotalPrice);
+        
     }, [order]);
-    
+   
 
     return (
         <>
@@ -37,7 +40,7 @@ function GetCart() {
                         <Button
                         className="decrement-btn" 
                         text="-"
-                        onClick={decrement} 
+                        onClick={() => decrement(item.id)} 
                         />
 
                         <p>{item.ticket}</p>
@@ -45,7 +48,7 @@ function GetCart() {
                         <Button
                         className="increment-btn"
                         text="+"
-                        onClick={increment}
+                        onClick={() => increment(item.id)}
                         /> 
                         </div>
                     </li>
@@ -54,12 +57,14 @@ function GetCart() {
             <h3 className='order-text'>Totalt värde på order </h3> 
             <h2 className='order-price__sum'>{totalPrice} SEK</h2>
             <Button 
-            className="order-sent__button"
-            text="Skicka order"
-            onClick={() => {
-                completeOrder();
-                resetCart();
-            }}/>
+                className="send-order__btn"
+                text="Skicka order"
+                onClick={() => {
+                    console.log("Event som skickas till order historik:", order );
+                  completeOrder(order);
+                    
+                  }}
+            />
         </>
     );
 }
