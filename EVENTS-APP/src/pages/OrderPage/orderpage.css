@@ -6,7 +6,7 @@
     color: whitesmoke;
     width: 100%;
     min-height: 100vh;
-    overflow: scroll;
+    padding-bottom: 150px;
 }
 .order-page__title {
     padding-bottom: 5rem;
