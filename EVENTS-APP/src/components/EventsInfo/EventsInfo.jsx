@@ -17,13 +17,9 @@ function EventsInfo() {
   const { setPrice,
           ticket, 
           price,
-          order,
           increment, 
           decrement,
-          addToCart,
-          selectecEvent
-
-          
+          addToCart          
         } = useTicketStore();
   
 
@@ -40,7 +36,7 @@ function EventsInfo() {
   if (isError) return <p className="error msg">Ett fel inträffade!</p>
   if (!event) return <p>Event hittades inte!</p>;
   
-  const totalPrice = ticket * price;
+  const totalPrice = ticket * price; //räknar ut total price för event info sida.
   
 
   return (
@@ -88,10 +84,3 @@ function EventsInfo() {
 }
 
 export default EventsInfo;
-
-{/* <Button 
-className="add-cart"
-text="Lägg i varukorgen"
-onClick={() => {addToCart({event,ticket});
-resetTotalPrice();}}
-/> */}

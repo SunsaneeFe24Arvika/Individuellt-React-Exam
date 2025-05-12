@@ -1,71 +1,123 @@
-import { useState, useEffect} from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Swiper from 'swiper';
+import { Navigation, EffectCoverflow } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-coverflow';
 import useTicketStore from '../../stores/counter';
-//import Barcode from '../Barcode/Barcode';
+import { v4 as uuidv4 } from 'uuid';
+import JsBarcode from 'jsbarcode';
 
+
+Swiper.use([Navigation, EffectCoverflow]);
 
 function GetTicket() {
-  //const orderHistory = useTicketStore((state) => state.orderHistory) || [];
-  const { ticket } = useTicketStore();
-  const [orderHistory, setOrderHistory] = useState([]);
+  const order = useTicketStore((state) => state.order) || [];
+  const swiperContainerRef = useRef(null);
+  
+  const [swiperInstance, setSwiperInstance] = useState(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem('ticket-store');
-    try {
-      const parsed = JSON.parse(stored);
-      if (Array.isArray(parsed)) {
-        setOrderHistory(parsed);
-      }else {
-        setOrderHistory([]);
-      }
-    } catch (error) {
-      console.log('Error parsing ticket-store data:', error);
-      setOrderHistory([]);
-    }
-  }, []);  
+    if (order.length > 0 && !swiperInstance) {
+      const swiper = new Swiper(swiperContainerRef.current, {
+      effect: 'coverflow',
+      grabCursor: true,
+      slidesPerView: 'auto',
+      initialSlide: Math.floor(order.length / 2),
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 100,
+        modifier: 2.5,
+        slideShadows: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    setSwiperInstance(swiper);
+  }
+       
+  }, [order, swiperInstance]);
 
-  // const generateRandomBarcode = (length = 8) => {
-  //     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  //     let result = "";
-  //     for (let i = 0 ; i < length; i++) {
-  //       const randomIndex = Math.floor(Math.random() * characters. length);
-  //         result += characters[randomIndex];
-  //     }
-  //     return result;
-  //   };
-
-  //   const barcode = generateRandomBarcode();
-   
+  // Generera streckkoder när komponenten renderas
+  useEffect(() => {
+    order.forEach((event) => {
+      Array.from({ length: event.ticket || 0 }).forEach((_, ticketIndex) => {
+        const barcodeId = `${event.id}-${ticketIndex}`;
+        const barcodeElement = document.getElementById(`barcode-${barcodeId}`);
+        const barcodeValue = `${event.id}-${ticketIndex}`; 
+        if (barcodeElement) {
+          JsBarcode(barcodeElement, barcodeValue, {
+            format: 'CODE128',
+            lineColor: '#000',
+            background: '#fff',
+            width: 2,
+            height: 200,
+            displayValue: false,
+            
+           });
+        }
+      });
+    });
+  }, [order]);
 
   return (
     <>
-    {orderHistory.length === 0 ? (
-      <p>Du har inte köpt några biljetter ännu.</p>
-    ) : (
-      <article>
-        {orderHistory.map((order, index) => (
-          Array.from({length: order.ticket}).map((_, ticketIndex) => (
-            <li key={`${order.id}- ${ticketIndex}`} className="ticket-cart">
-            <p>WHAT</p>
-            <h1>{order.name}</h1>
-            <p>WHERE</p>
-            <h2>{order.where}</h2>
-            <p>WHEN</p>
-            <h3>{order.when.date}</h3>
-            <p>FROM</p>
-            <h3>{order.when.from}</h3>
-            <p>TO</p>
-            <h3>{order.when.to}</h3>
-            <p>INFO</p>
+      {order.length === 0 ? (
+        <p className="ticket-text">Du har inte köpt några biljetter ännu.</p>
+      ) : (
+        <article className="swiper-container ticket-card__list" ref={swiperContainerRef}>
+          <div className="swiper-wrapper">
+            {order.map((event) =>
+              Array.from({ length: event.ticket || 0 }).map((_, ticketIndex) => {
+                const barcodeId = `${event.id}-${ticketIndex}`;
+                const barcodeValue = `${event.id}-${ticketIndex}`;
+                return (
+                  <li key={barcodeId} className="ticket-card swiper-slide">
+                    <aside className="ticket-info__box">
+                      <p className="ticket-text">WHAT</p>
+                      <h1 className="ticket__name">{event.name}</h1>
 
-            <p>{order.section}</p> <span>{order.seats}</span>
-            {/* <Barcode value={barcode} /> */}
-          </li>
-          ))          
-        ))}        
-      </article>
-    )}
+                      <p className="ticket-text">WHERE</p>
+                      <h2 className="ticket__place">{event.where}</h2>
+                      <div className="ticket-details">
+                        <p className="ticket__time">WHEN
+                          <p className="ticket__date">
+                          {event.when.date}  
+                        </p>
+                        </p>
+                        
+                        <p className="ticket__start"> FROM
+                          <p className="ticket__from">{event.when.from}</p>
+                        </p>
+                        <p className="ticket__end"> TO
+                          <p className="ticket__to">
+                            {event.when.to}
+                          </p>
+                        </p>
+                      </div>
+
+                      <p className="ticket-text">Section: {event.section || 'Ej tilldelad'} , Seat: {event.seats ? event.seats[ticketIndex] : 'Ej tilldelad'}</p>
+                      <span className="ticket-text"> </span>
+
+                      {/* Streckkod och kod på text */}
+                      <svg id={`barcode-${barcodeId}`} className="barcode"></svg>
+                      <p className="barcode-text">{barcodeValue}</p>
+                    </aside>
+                  </li>
+                );
+              })
+            )}
+          </div>
+          <div className="swiper-button-next"></div>
+          <div className="swiper-button-prev"></div>
+        </article>
+      )}
     </>
   );
 }
 
 export default GetTicket;
+

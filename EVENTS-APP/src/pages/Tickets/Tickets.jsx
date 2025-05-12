@@ -1,11 +1,12 @@
 import Footer from "../../components/Footer/Footer";
 import GetTicket from "../../components/GetTicket/GetTicket";
+import './ticket.css';
 
 function Tickets() {
   return (
     <>
-    <section className="order-Page">
-      <h1 className="page__title__standard">Your Tickets</h1>
+    <section className="ticket-page">
+      <h1 className="page__title__standard ticket__title">Your Tickets</h1>
       <GetTicket />
       
     </section>
