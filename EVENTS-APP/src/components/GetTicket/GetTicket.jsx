@@ -83,20 +83,20 @@ function GetTicket() {
                       <p className="ticket-text">WHERE</p>
                       <h2 className="ticket__place">{event.where}</h2>
                       <div className="ticket-details">
-                        <p className="ticket__time">WHEN
+                        <div className="ticket__time">WHEN
                           <p className="ticket__date">
                           {event.when.date}  
                         </p>
-                        </p>
+                        </div>
                         
-                        <p className="ticket__start"> FROM
+                        <div className="ticket__start"> FROM
                           <p className="ticket__from">{event.when.from}</p>
-                        </p>
-                        <p className="ticket__end"> TO
+                        </div>
+                        <div className="ticket__end"> TO
                           <p className="ticket__to">
                             {event.when.to}
                           </p>
-                        </p>
+                        </div>
                       </div>
 
                       <p className="ticket-text">Section: {event.section || 'Ej tilldelad'} , Seat: {event.seats ? event.seats[ticketIndex] : 'Ej tilldelad'}</p>
