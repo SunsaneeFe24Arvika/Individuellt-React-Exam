@@ -8,7 +8,7 @@ import FooterItem from "./FooterItem";
 import useTicketStore from "../../stores/counter";
 import { FaCartShopping } from "react-icons/fa6";
 import { useLocation } from "react-router-dom";
-import GetTicket from "../GetTicket/GetTicket";
+
 
 import './footer.css';
 
@@ -47,9 +47,8 @@ function Footer() {
         },
         {
             name: "Tickets",
-            action: () => {
-              GetTicket();
-              navigate("/tickets")},
+            action: () => {              
+            navigate("/tickets")},
             icon: <BsTicketPerforatedFill />,
         },
     ];

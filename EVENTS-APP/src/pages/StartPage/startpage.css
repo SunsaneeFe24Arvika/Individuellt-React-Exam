@@ -1,20 +1,21 @@
 
-
-.start-page {
+.start-page {    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 768px;
+    width: 100vw;
     height: 100vh;
     
 }
 .logo {
     width: 250px;
     height: 250px;
+    cursor: pointer;
 }
 .start-page__title {
     font-size: 36px;
+    margin: 2rem 0;
 }
 .start-page__desc {
     color: var(--White);

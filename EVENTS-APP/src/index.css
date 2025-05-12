@@ -25,10 +25,13 @@
 }
 
 .page__title__standard,
-.event__title {
+.event__title,
+.start-page__title
+{
   color: var(--Pink);
-  font-size: 2rem;
+  font-size: 5rem;
   font-weight: 900;
+  padding-top: 3rem;
   
 }
 .page__title-big {
@@ -39,7 +42,9 @@
 .event__title, 
 .event__total-price,
 .page__title__standard,
-.event__places
+.event__places,
+.ticket__name,
+.ticket__title
 
 {
   font-family: var(--Sansita-One);
@@ -60,7 +65,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
   background-color: var(--Background-color);
   padding-top: 2rem;
@@ -92,7 +97,11 @@ label {
 .add-cart,
 .order-text,
 .order-price__sum,
-.event-text
+.event-text,
+.ticket-text,
+.ticket__place,
+.ticket__date,
+.barcode-text
 {
   font-family: var(--FiraSans-Font);
 }
@@ -102,9 +111,28 @@ label {
   background-color: var(--Blue);
   color: var(--White);
 }
-.increment-btn,
+
 .decrement-btn {
   background-color: var(--Background-color);
   border: none;
+  padding: 1rem 2rem;
+  border-right: solid 2px palevioletred;
+}
+.increment-btn {
+  background-color: var(--Background-color);
+  border: none;
+  padding: 1rem 2rem;
+  border-left: solid 2px palevioletred;    
+}
+
+@media (max-width: 930px) {
+.page__title__standard
+{
+  font-size: 3rem;
+}
+.event__title,
+.start-page__title {
+  font-size: 2rem;
+}
   
 }

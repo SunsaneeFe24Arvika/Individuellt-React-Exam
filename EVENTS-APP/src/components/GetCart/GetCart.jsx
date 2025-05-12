@@ -1,13 +1,17 @@
 import useTicketStore from '../../stores/counter';
 import { useEffect, useState } from "react";
 import Button from '../Buttons/Button';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function GetCart() {
     const order = useTicketStore((state) => state.order) || [];
     const setOrder = useTicketStore((state) => state.setOrder);
     const [totalPrice, setTotalPrice] = useState(0);
-    const { increment, decrement, completeOrder} = useTicketStore();
+    const { increment, decrement, completeOrder, addToCart} = useTicketStore();
+
+    const navigate = useNavigate();
 
     //Hämta data från localStorage vid sidladdning
     useEffect(() => {
@@ -67,11 +71,15 @@ function GetCart() {
             <h2 className='order-price__sum'>{totalPrice} SEK</h2>
             <Button 
                 className="send-order__btn"
-                text="Skicka order"
+                text="Skicka order"    
                 onClick={() => {
-                    console.log("Event som skickas till order historik:", order );
-                  completeOrder(order);
-                    
+                    if (order.length > 0) {
+                        console.log("Event som skickas till order historik:", order );
+                        addToCart(order);
+                        navigate("/tickets") 
+                    } else {
+                        alert('Din korg är tom!');
+                    }                                       
                   }}
             />
         </>

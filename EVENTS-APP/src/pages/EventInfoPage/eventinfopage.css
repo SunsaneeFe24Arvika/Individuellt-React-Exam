@@ -14,6 +14,7 @@
     padding-top: 3rem;
     text-align: center;
     gap: 0.5rem;
+    margin-bottom: 3rem;
 }
 
 .event-info__date, .event-info__start {
@@ -49,10 +50,9 @@
 }
 .event-info__button {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    gap: 2rem;
-    padding: 1rem;
+    font-size: 2rem; 
     
         
 }
@@ -62,12 +62,21 @@
     font-size: 2rem;
     color: white;
     opacity: 80%;
+    
 }
-.add-cart,
-.send-order__btn
-{
+
+.send-order__btn{
     padding: 1.2rem;
-    margin-top: 10rem;
+    width: 310px;
+    height: 60px;
+    font-size: 22px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.add-cart {
+    padding: 1.2rem;
     width: 310px;
     height: 60px;
     font-size: 22px;

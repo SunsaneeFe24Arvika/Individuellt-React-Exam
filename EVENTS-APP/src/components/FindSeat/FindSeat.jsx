@@ -1,47 +1,37 @@
-import React from 'react'
-import { useState, useEffect} from 'react';
+
+import GetTicket from '../GetTicket/GetTicket';
 
 function FindSeat() {
-    const orderHistory = () => {
-        const order = localStorage.getItem('ticket-store');
-        return order ? JSON.parse(order) : [];
-    }
-
     const section = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
     const randomSeats = (ticket) => {
-        const section = section[Math.floor(Math.random() * section.length)]; //Slumpa section
+        const sectionName = section[Math.floor(Math.random() * section.length)]; //Slumpa section
         const maxStart = 500 - ticket + 1;
         const startSeat = Math.floor(Math.random() * maxStart) + 1;
 
         const seats = Array.from({ length: ticket }, (_, i) => startSeat + i);
         return {
-            section, seats,
+            section: sectionName, 
+            seats,
         };
     };
 
-    const Resultat = randomSeats(3);
-    console.log(Resultat);
-    
-
-        const findSeats = (ticket) => {
-        for (let section of section) {            
-                const emptyIndexes = section.seats.map((seat, index) =>
-                     (seat === null ? index : null)).filter(index => index !== null);
-
-                if (emptyIndexes.length > ticket) {
-                    return {
-                        section: section.name,
-                        seats: emptyIndexes.slice(0, ticket)
-                    };
-                }            
-        }
-        return null; // om inga platser hittas
+    const assignSeats = () => {
+        const orders = JSON.parse(localStorage.getItem('tiket-store')) || [];
+        return orders.map((order) => {
+            const seatAssignment = randomSeats(order.ticket);
+            return {
+                ...order,
+                section: seatAssignment.section,
+                seats: seatAssignment.seats,
+            };
+        });
     };
 
-  return (
-    <div>FindSeat</div>
-  );
+    const seatingPlan = assignSeats();
+
+  return <GetTicket seatingPlan={seatingPlan} />;
+  
 }
 
 export default FindSeat;
