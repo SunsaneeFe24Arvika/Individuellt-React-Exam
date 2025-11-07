@@ -37,15 +37,15 @@ function GetCart() {
         <>
            {(order?.length || 0) === 0 && <p className='order-text'>Din korg är tom!</p>}
             <ul className='order-list'>
-                {(order || []).map((item) => (
-                    <li className='order-item' key={item.id}>
+                {(order || []).map((item, index) => (
+                    <li className='order-item' key={item.id || `order-item-${index}`}>
                         <div className='order__article'>
                         <article className='event-list__info'>
                             <h3 className="event__title">
                                 {item.name}
                             </h3>
                             <p className="event-text">
-                                {item.when.date} - {item.when.from}
+                                {item.when?.date} - {item.when?.from}
                             </p>
                         </article>                                                   
                         </div>

@@ -1,5 +1,4 @@
-//import { Flex } from "@chakra-ui/react";
-//import { DecorativeBox } from "compositions/lib/decorative-box";
+
 import { VscChevronLeft } from "react-icons/vsc";
 import { FaList } from "react-icons/fa";
 import { BsTicketPerforatedFill } from "react-icons/bs";
